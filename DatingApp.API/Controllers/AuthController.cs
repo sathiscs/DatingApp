@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
 using DatingApp.API.Dtos;
-using DatingApp.API.Model;
+using DatingApp.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -30,7 +30,7 @@ namespace DatingApp.API.Controllers
         {
             if (!await _rep.UserExist(userToRegister.UserName.ToLower()))
             {
-                var regUser = new User{ UserName = userToRegister.UserName};
+                var regUser = new User{ Username = userToRegister.UserName};
 
                 var reg = await _rep.register(regUser, userToRegister.Password);
                 return StatusCode(201);
@@ -42,7 +42,7 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            var userFromRepo = await _rep.login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
+            var userFromRepo = await _rep.login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -50,7 +50,7 @@ namespace DatingApp.API.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.UserName)
+                new Claim(ClaimTypes.Name, userFromRepo.Username)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
