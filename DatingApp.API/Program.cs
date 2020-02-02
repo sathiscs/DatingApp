@@ -22,7 +22,7 @@ namespace DatingApp.API
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<MyDataContext>();
+                    var context = services.GetRequiredService<DataContext>();
                     context.Database.Migrate();
                     Seed.SeedUsers(context);
                 }

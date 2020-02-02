@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DatingApp.API.Migrations
 {
-    [DbContext(typeof(MyDataContext))]
+    [DbContext(typeof(DataContext))]
     [Migration("20200126221921_restOftheChanges")]
     partial class restOftheChanges
     {

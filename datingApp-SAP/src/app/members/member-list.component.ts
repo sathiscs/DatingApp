@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { User } from '../../_models/user';
-// import { UserService } from '../../_services/user.service';
-// import { AlertifyService } from '../../_services/alertify.service';
-// import { ActivatedRoute } from '@angular/router';
-// import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
+import { User } from '../_models/user';
+import { UserServiceService} from '../services/userService.service';
+import { AlertifyService } from '../services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
+import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
 
 @Component({
   selector: 'app-member-list',
@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  // users: User[];
+  users: User[];
   // user: User = JSON.parse(localStorage.getItem('user'));
   // genderList = [
   //   { value: 'male', display: 'Males' },
@@ -20,11 +20,11 @@ export class MemberListComponent implements OnInit {
   // userParams: any = {};
   // pagination: Pagination;
 
-  // constructor(
-  //   private userService: UserService,
-  //   private alertify: AlertifyService,
-  //   private route: ActivatedRoute
-  // ) {}
+  constructor(
+    private userService: UserServiceService,
+    private alertify: AlertifyService,
+    private route: ActivatedRoute
+  ) {}
 
   // ngOnInit() {
   //   this.route.data.subscribe(data => {
